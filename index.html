@@ -1,0 +1,88 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+
+<head>
+    <title>EE Office</title>
+    <style type="text/css">
+        body {
+            background-color: #205c7e;
+        }
+
+        .content {
+            position: absolute;
+            top: 10px;
+            bottom: 10px;
+            left: 10px;
+            right: 10px;
+        }
+
+        iframe {
+            border: none;
+            height: 70%;
+            width: 100%;
+        }
+
+        .trello-board-header {
+            display: none;
+        }
+
+        .tickcounters {
+            display: -webkit-flex;
+            display: flex;
+            height: 30%;
+        }
+
+        .tickcounter {
+            -webkit-flex: 1;
+            -ms-flex: 1;
+            flex: 1;
+            margin-right: 8px;
+        }
+    </style>
+
+    <script type="text/javascript" src="//www.tickcounter.com/static/js/loader.js"></script>
+
+    <script type="text/javascript">
+        function qp(p) {
+            const match = window.location.search.match(p + "=([^&]*)")
+            return match ? match[1] : undefined
+        }
+
+        function countersHTML() {
+            return qp("counters")
+                .split(",")
+                .map(counterHTML)
+        }
+
+        function counterHTML(counterID) {
+            return '<div data-type="countdown" data-id="' + counterID + '" class="tickcounter"><a href="//www.tickcounter.com/countdown/" + id + "></a></div>'
+        }
+
+        function trelloHTML() {
+            return '<iframe id="trelloFrame" src="//trello.com/b/' + qp("board") + '.html?cb=' + new Date().getTime() + '" />'
+        }
+
+        const autorefresh = qp("autorefresh")
+        if (autorefresh) {
+          setTimeout(function () { window.location.reload() }, +autorefresh * 1000)
+        }
+
+    </script>
+</head>
+
+<body>
+    <div class="content">
+        <div class="tickcounters">
+            <script>
+                document.write(countersHTML())
+            </script>
+        </div>
+
+        <script>
+            document.write(trelloHTML())
+        </script>
+    </div>
+</body>
+
+</html>
