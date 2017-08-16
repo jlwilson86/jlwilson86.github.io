@@ -50,9 +50,8 @@
         }
 
         function countersHTML() {
-            return qp("counters")
-                .split(",")
-                .map(counterHTML)
+            const counterIDs = qp("counters")
+            return counterIDs ? counterIDs.split(",").map(counterHTML) : "<p>No counters specified</p>"
         }
 
         function counterHTML(counterID) {
@@ -60,7 +59,8 @@
         }
 
         function trelloHTML() {
-            return '<iframe id="trelloFrame" src="//trello.com/b/' + qp("board") + '.html?cb=' + new Date().getTime() + '" />'
+            const boardID = qp("board")
+            return boardID ? '<iframe id="trelloFrame" src="//trello.com/b/' + boardID + '.html?cb=' + new Date().getTime() + '" />' : "No board ID specified"
         }
 
         const autorefresh = qp("autorefresh")
